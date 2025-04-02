@@ -30,5 +30,34 @@ The return value should be like:
 import numpy as np
 
 def apply_geometric_transformations(img: np.ndarray) -> dict:
-    # Your implementation here
-    pass
+    def translated_image(img, shift_x=13, shift_y=13):
+        h, w = img.shape
+        
+        translated = np.zeros((h, w), dtype=img.dtype)
+        
+        x_start = min(shift_x, w)
+        y_start = max(shift_y, h)
+        
+        translated[y_start:, x_start:] = img[:h-y_start, :w-x_start]
+        
+        return translated
+    
+    def rotated_image(img):
+        return np.flipud    
+    
+    def horizontally_stretched_image(img):
+        pass
+    
+    def horizontally_mirrored_image(img):
+        pass
+    
+    def barrel_distorted_image(img):
+        pass    
+    
+    return {
+        "translated": translated_image(img),
+        "rotated": np.ndarray,
+        "stretched": np.ndarray,
+        "mirrored": np.ndarray,
+        "distorted": np.ndarray
+    } 

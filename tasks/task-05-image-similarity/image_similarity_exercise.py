@@ -79,4 +79,11 @@ def compare_images(i1: np.ndarray, i2: np.ndarray) -> dict:
         "psnr": psnr_value,
         "ssim": ssim_value,
         "npcc": npcc_value
-    }
+    }        
+    
+if __name__ == "__main__":
+    i1 = np.random.rand(256, 256)
+    i2 = np.random.rand(256, 256)
+    
+    metrics = compare_images(i1, i2)
+    print(metrics)
