@@ -32,5 +32,34 @@ Assume that i1 and i2 are normalized grayscale images (values between 0 and 1).
 import numpy as np
 
 def compare_images(i1: np.ndarray, i2: np.ndarray) -> dict:
-    # Your implementation here
-    pass
+    
+    def mse(i1, i2):
+        return np.mean((i1 - i2) ** 2)
+    
+    def psnr(i1, i2):
+        mse_value = mse(i1, i2)
+        if mse == 0:
+            return float("inf")
+        max_pixel = 1.0
+        return 10 * np.log10(max_pixel ** 2 / mse)
+    
+    # def ssim(i1, i2):
+    #     pass
+    
+    def npcc(i1, i2):
+        covariance = np.cov(i1.flatten(), i2.flatten())[0, 1]
+        std_x = np.std(i1)
+        std_y = np.std(i2)
+        return covariance / (std_x * std_y)
+    
+    mse_value = mse(i1, i2)
+    psnr_value = psnr(i1, i2)
+    # ssim_value = ssim(i1, i2)
+    npcc_value = npcc(i1, i2)
+    
+    return {
+        "mse": mse_value,
+        "psnr": psnr_value,
+        # "ssim": ssim_value,
+        "npcc": npcc_value
+    }        
